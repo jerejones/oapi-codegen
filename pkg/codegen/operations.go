@@ -241,6 +241,13 @@ func (o *OperationDefinition) HasBody() bool {
 	return o.Spec.RequestBody != nil
 }
 
+func (o *OperationDefinition) BodyType() string {
+	if len(o.Bodies) < 1 {
+		return ""
+	}
+	return o.Bodies[0].Schema.GoType
+}
+
 // This returns the Operations summary as a multi line comment
 func (o *OperationDefinition) SummaryAsComment() string {
 	if o.Summary == "" {

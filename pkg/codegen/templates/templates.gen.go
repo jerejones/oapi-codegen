@@ -711,7 +711,7 @@ type {{$opid}}{{.NameTag}}RequestBody {{.TypeDef}}
 type ServerInterface interface {
 {{range .}}{{.SummaryAsComment -}}
 // ({{.Method}} {{.Path}})
-{{.OperationId}}(ctx echo.Context{{genParamArgs .PathParams}}{{if .RequiresParamObject}}, params {{.OperationId}}Params{{end}}) error
+{{.OperationId}}(ctx echo.Context{{genParamArgs .PathParams}}{{if .RequiresParamObject}}, params {{.OperationId}}Params{{end}}{{if .HasBody}}, body {{.BodyType}}{{end}}) error
 {{end}}
 }
 `,
@@ -842,8 +842,25 @@ func (w *ServerInterfaceWrapper) {{.OperationId}} (ctx echo.Context) error {
 {{end}}{{/* .CookieParams */}}
 
 {{end}}{{/* .RequiresParamObject */}}
+
+{{if .HasBody }}
+    bodyRdr := ctx.Request().Body
+    if bodyRdr == nil {
+        return echo.ErrBadRequest
+    }
+    defer body.Close()
+
+    	var body {{.BodyType}}
+    	dec := json.NewDecoder(bodyRdr)
+    	err = dec.Decode(&body)
+    	if err != nil {
+    		return echo.ErrBadRequest
+    	}
+
+{{end}}{{/* .HasBody */}}
+
     // Invoke the callback with all the unmarshalled arguments
-    err = w.Handler.{{.OperationId}}(ctx{{genParamNames .PathParams}}{{if .RequiresParamObject}}, params{{end}})
+    err = w.Handler.{{.OperationId}}(ctx{{genParamNames .PathParams}}{{if .RequiresParamObject}}, params{{end}}{{if .HasBody}}, body{{end}})
     return err
 }
 {{end}}
