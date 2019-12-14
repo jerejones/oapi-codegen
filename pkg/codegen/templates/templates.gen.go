@@ -848,7 +848,7 @@ func (w *ServerInterfaceWrapper) {{.OperationId}} (ctx echo.Context) error {
     if bodyRdr == nil {
         return echo.ErrBadRequest
     }
-    defer body.Close()
+    defer bodyRdr.Close()
 
     	var body {{.BodyType}}
     	dec := json.NewDecoder(bodyRdr)
