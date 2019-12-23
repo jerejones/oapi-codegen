@@ -1,4 +1,4 @@
-module github.com/deepmap/oapi-codegen
+module github.com/jerejones/oapi-codegen
 
 require (
 	github.com/cyberdelia/templates v0.0.0-20141128023046-ca7fffd4298c
@@ -19,5 +19,7 @@ require (
 	golang.org/x/tools v0.0.0-20191125144606-a911d9008d1f // indirect
 	gopkg.in/yaml.v2 v2.2.5 // indirect
 )
+
+replace github.com/deepmap/oapi-codegen => github.com/jerejones/oapi-codegen
 
 go 1.13
