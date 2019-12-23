@@ -1,8 +1,9 @@
 module github.com/jerejones/oapi-codegen
 
+go 1.13
+
 require (
 	github.com/cyberdelia/templates v0.0.0-20141128023046-ca7fffd4298c
-	github.com/deepmap/oapi-codegen v1.3.3
 	github.com/getkin/kin-openapi v0.2.0
 	github.com/go-chi/chi v4.0.2+incompatible
 	github.com/golangci/lint-1 v0.0.0-20181222135242-d2cdd8c08219
@@ -20,7 +21,3 @@ require (
 	golang.org/x/tools v0.0.0-20191125144606-a911d9008d1f // indirect
 	gopkg.in/yaml.v2 v2.2.5 // indirect
 )
-
-replace github.com/deepmap/oapi-codegen => ./
-
-go 1.13

@@ -18,6 +18,12 @@ This package tries to be too simple rather than too generic, so we've made some
 design decisions in favor of simplicity, knowing that we can't generate strongly
 typed Go code for all possible OpenAPI Schemas.
 
+## Credit where credit is due
+I did not write this code.  This codebase is a fork of
+[github.com/deepmap/oapi-codegen](https://github.com/deepmap/oapi-codegen) 
+and all credit belongs to him. This fork addresses specific concerns required by my 
+specific needs.
+
 ## Overview
 
 We're going to use the OpenAPI example of the
@@ -29,7 +35,7 @@ write a lot of boilerplate code to perform all the marshalling and unmarshalling
 into objects which match the OpenAPI 3.0 definition. The code generator in this
 directory does a lot of that for you. You would run it like so:
 
-    go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen
+    go get github.com/jerejones/oapi-codegen/cmd/oapi-codegen
     oapi-codegen petstore-expanded.yaml  > petstore.gen.go
 
 Let's go through that `petstore.gen.go` file to show you everything which was
@@ -330,7 +336,7 @@ which help you to use the various OpenAPI 3 Authentication mechanism.
 
 ```
     import (
-        "github.com/deepmap/oapi-codegen/pkg/securityprovider"
+        "github.com/jerejones/oapi-codegen/pkg/securityprovider"
     )
 
     func CreateSampleProviders() error {
